@@ -8,11 +8,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 public class Pay {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String payNo;
     private String orderNo;
@@ -21,7 +23,9 @@ public class Pay {
     @Column(columnDefinition = "decimal(8,2)")
     private BigDecimal amount;
     private int deleted;
+    @CreationTimestamp
     private LocalDateTime createTime;
+    @UpdateTimestamp
     private LocalDateTime updateTime;
 
     public Pay() {
