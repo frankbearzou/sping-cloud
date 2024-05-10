@@ -18,7 +18,7 @@ public class Pay {
     private String orderNo;
     @Column(columnDefinition = "int default '1'")
     private int userId;
-    @Column(columnDefinition = "decimal(8,2) default '9.9'")
+    @Column(columnDefinition = "decimal(8,2)")
     private BigDecimal amount;
     private int deleted;
     private LocalDateTime createTime;
