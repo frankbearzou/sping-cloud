@@ -24,7 +24,7 @@ public class PayController {
     }
 
     @GetMapping("/{id}")
-    public Pay pay(@PathVariable int id) {
+    public Pay getPay(@PathVariable("id") int id) {
         return payService.getPayment(id);
     }
 
@@ -48,7 +48,7 @@ public class PayController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable int id) {
+    public void delete(@PathVariable("id") int id) {
         payService.deletePayment(id);
     }
 }
