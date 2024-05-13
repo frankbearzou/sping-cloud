@@ -3,6 +3,7 @@ package org.cloud.entity;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,16 +13,21 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
+@Schema(title = "payment")
 public class Pay {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Schema(title = "pay no")
     private String payNo;
+    @Schema(title = "order no")
     private String orderNo;
     @Column(columnDefinition = "int default '1'")
+    @Schema(title = "user id")
     private int userId;
     @Column(columnDefinition = "decimal(8,2)")
     private BigDecimal amount;
+    @Schema(title = "not deleted: 0, deleted: 1")
     private int deleted;
     @CreationTimestamp
     private LocalDateTime createTime;
