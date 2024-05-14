@@ -9,6 +9,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>commons</module>
         <module>payment</module>
         <module>order</module>
     </modules>

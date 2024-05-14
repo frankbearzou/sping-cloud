@@ -43,7 +43,7 @@
         </dependency>
         <dependency>
             <groupId>org.cloud</groupId>
-            <artifactId>common</artifactId>
+            <artifactId>commons</artifactId>
             <version>1.0</version>
         </dependency>
     </dependencies>
