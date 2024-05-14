@@ -49,7 +49,10 @@ public class PayController {
     public Pay update(@RequestBody PayDTO payDTO) {
         Pay pay = payService.getPayment(payDTO.getId());
         if (pay != null) {
-            payDTO.updatePay(pay);
+            pay.setPayNo(payDTO.getPayNo());
+            pay.setOrderNo(payDTO.getOrderNo());
+            pay.setUserId(payDTO.getUserId());
+            pay.setAmount(payDTO.getAmount());
         }
         return payService.updatePayment(pay);
     }
