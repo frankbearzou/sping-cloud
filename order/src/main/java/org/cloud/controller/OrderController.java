@@ -2,7 +2,7 @@ package org.cloud.controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
-import org.cloud.dto.PayDTO;
+import org.cloud.dto.PayDto;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,12 +21,12 @@ public class OrderController {
     private RestTemplate restTemplate;
 
     @GetMapping("/pay/{id}")
-    public PayDTO getPay(@PathVariable("id") Integer id) {
-        return restTemplate.getForObject(URL + "/pay/" + id, PayDTO.class);
+    public PayDto getPay(@PathVariable("id") Integer id) {
+        return restTemplate.getForObject(URL + "/pay/" + id, PayDto.class);
     }
 
     @PostMapping("/pay")
-    public PayDTO addOrder(@RequestBody PayDTO payDTO) {
-        return restTemplate.postForObject(URL + "/pay", payDTO, PayDTO.class);
+    public PayDto addOrder(@RequestBody PayDto payDTO) {
+        return restTemplate.postForObject(URL + "/pay", payDTO, PayDto.class);
     }
 }

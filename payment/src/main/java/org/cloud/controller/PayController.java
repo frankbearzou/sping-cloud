@@ -4,7 +4,7 @@ import java.util.List;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.cloud.dto.PayDTO;
+import org.cloud.dto.PayDto;
 import org.cloud.entity.Pay;
 import org.cloud.service.PayService;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -46,7 +46,7 @@ public class PayController {
 
     @PutMapping
     @Operation(summary = "update pay information")
-    public Pay update(@RequestBody PayDTO payDTO) {
+    public Pay update(@RequestBody PayDto payDTO) {
         Pay pay = payService.getPayment(payDTO.getId());
         if (pay != null) {
             pay.setPayNo(payDTO.getPayNo());
