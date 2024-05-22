@@ -1,8 +1,6 @@
 server:
   port: 8001
 spring:
-  application:
-    name: cloud-payment-service
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres

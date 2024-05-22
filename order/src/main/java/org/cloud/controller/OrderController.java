@@ -15,7 +15,7 @@ import org.springframework.web.client.RestTemplate;
 @RequestMapping("/order")
 @Tag(name = "order controller")
 public class OrderController {
-    private static final String URL = "http://localhost:8001";
+    private static final String URL = "http://cloud-payment-service";
 
     @Resource
     private RestTemplate restTemplate;

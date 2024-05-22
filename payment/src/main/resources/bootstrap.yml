@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: cloud-payment-service
+  cloud:
+    consul:
+      config:
+        format: yaml

@@ -7,6 +7,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.cloud.dto.PayDto;
 import org.cloud.entity.Pay;
 import org.cloud.service.PayService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,21 +23,33 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/pay")
 @Tag(name = "pay controller")
 public class PayController {
+    private static final Logger logger = LoggerFactory.getLogger(PayController.class);
+
+    @Value("${server.port}")
+    int port;
+
     private PayService payService;
 
     public PayController(PayService payService) {
         this.payService = payService;
     }
 
+    @GetMapping("/config")
+    public String getConfig(@Value("${app.message}") String appMessage) {
+        return "appMessage=" + appMessage + ". port=" + port;
+    }
+
     @GetMapping("/{id}")
     @Operation(summary = "get pay by pay id")
     public Pay getPay(@PathVariable("id") int id) {
+        logger.info("port: {}", port);
         return payService.getPayment(id);
     }
 
     @GetMapping
     @Operation(summary = "get all pay")
     public List<Pay> getPayList() {
+        logger.info("port: {}", port);
         return payService.getPaymentList();
     }
 
