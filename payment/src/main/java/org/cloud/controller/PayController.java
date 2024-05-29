@@ -4,7 +4,7 @@ import java.util.List;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.cloud.dto.PayDto;
+import org.cloud.commons.dto.PayDto;
 import org.cloud.entity.Pay;
 import org.cloud.service.PayService;
 import org.slf4j.Logger;

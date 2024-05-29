@@ -1,4 +1,4 @@
-package org.cloud.dto;
+package org.cloud.commons.dto;
 
 import java.math.BigDecimal;
 

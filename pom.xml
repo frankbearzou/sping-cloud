@@ -12,6 +12,7 @@
         <module>commons</module>
         <module>payment</module>
         <module>order</module>
+        <module>feign-order</module>
     </modules>
 
     <properties>
