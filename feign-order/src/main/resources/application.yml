@@ -9,3 +9,5 @@ spring:
         config:
           default:
             readTimeout: 2000
+          cloud-payment-service:
+            readTimeout: 5000
