@@ -1,8 +1,6 @@
 package org.cloud.controller;
 
 import java.util.List;
-
-import jakarta.annotation.Resource;
 import org.cloud.commons.dto.PayDto;
 import org.cloud.commons.feign.PayFeignApi;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +19,14 @@ public class OrderController {
 
     @GetMapping("/feign/pay/{id}")
     public PayDto getPay(@PathVariable("id") int id) {
-        return payFeignApi.getPay(id);
+        PayDto pay = null;
+        try {
+            pay = payFeignApi.getPay(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return pay;
     }
 
     @GetMapping("/feign/pay")

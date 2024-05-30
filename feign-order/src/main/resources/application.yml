@@ -3,3 +3,9 @@ server:
 spring:
   application:
     name: cloud-feign-order-service
+  cloud:
+    openfeign:
+      client:
+        config:
+          default:
+            readTimeout: 2000
