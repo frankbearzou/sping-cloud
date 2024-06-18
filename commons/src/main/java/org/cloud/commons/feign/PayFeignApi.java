@@ -15,4 +15,7 @@ public interface PayFeignApi {
 
     @GetMapping("/pay")
     List<PayDto> getPayList();
+
+    @GetMapping("/pay/circuit/{id}")
+    String getPayCircuit(@PathVariable("id") int id);
 }
