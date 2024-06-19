@@ -13,11 +13,18 @@ spring:
           cloud-payment-service:
             connect-timeout: 20000
             readTimeout: 20000
-#      circuitbreaker:
-#        enabled: true
+      httpclient:
+        connection-timeout: 20000
+        hc5:
+          enabled: true
+          connection-request-timeout-unit: seconds
+          connection-request-timeout: 20
+      circuitbreaker:
+        enabled: true
 #        group:
 #          enabled: true
-resilience4j:
+# circuitbreaker
+#resilience4j:
 #  circuitbreaker:
 #    configs:
 #      default:
@@ -34,17 +41,35 @@ resilience4j:
 #    instances:
 #      cloud-payment-service:
 #        base-config: default
+#bulkhead semaphore
+#resilience4j:
+#  timelimiter:
+#    configs:
+#      default:
+#        timeout-duration:
+#          seconds: 20
+#  bulkhead:
+#    configs:
+#      default:
+#        max-concurrent-calls: 2
+#        max-wait-duration:
+#          seconds: 6
+#    instances:
+#      cloud-payment-service:
+#        base-config: default
+#bulkhead thread pool
+resilience4j:
   timelimiter:
     configs:
       default:
-        timeout-duration:
-          seconds: 20
-  bulkhead:
+        timeout-duration: 10s
+  thread-pool-bulkhead:
     configs:
       default:
-        max-concurrent-calls: 2
-        max-wait-duration:
-          seconds: 2
+        core-thread-pool-size: 1
+        max-thread-pool-size: 1
+        queue-capacity: 0
+
     instances:
       cloud-payment-service:
         base-config: default

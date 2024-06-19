@@ -13,7 +13,7 @@ public class PayCircuitBreakerController {
         if (id == -4) {
             throw new RuntimeException("circuit id -4");
         }
-        if (id == 9999) {
+        if (id >= 1000) {
             try {
                 Thread.sleep(5_000);
             } catch (InterruptedException e) {

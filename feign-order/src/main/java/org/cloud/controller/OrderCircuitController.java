@@ -1,5 +1,8 @@
 package org.cloud.controller;
 
+import java.util.Random;
+import java.util.concurrent.CompletableFuture;
+
 import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import jakarta.annotation.Resource;
@@ -36,5 +39,20 @@ public class OrderCircuitController {
 
     public String bulkheadFallback(Integer id, Throwable throwable) {
         return "bulkhead fallback: system busy, please try again later. " + throwable.getMessage();
+    }
+
+    @GetMapping("/feign/pay/bulkhead-thread-pool/{id}")
+    @Bulkhead(name = "cloud-payment-service", fallbackMethod = "bulkheadThreadPoolFallback", type = Bulkhead.Type.THREADPOOL)
+    public CompletableFuture<String> payBulkheadThreadPool(@PathVariable("id") Integer id) {
+        Random r = new Random();
+        int index = r.nextInt();
+        logger.info("enter " + index);
+        CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> payFeignApi.getPayCircuit(id));
+        logger.info("leave " + index);
+        return future;
+    }
+
+    public CompletableFuture<String> bulkheadThreadPoolFallback(Integer id, Throwable throwable) {
+        return CompletableFuture.supplyAsync(() -> "bulkhead thread pool fallback: system busy, please try again later. " + throwable.getMessage());
     }
 }
