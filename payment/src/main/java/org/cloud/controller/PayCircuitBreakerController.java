@@ -23,4 +23,9 @@ public class PayCircuitBreakerController {
         UUID uuid = UUID.randomUUID();
         return "Hello " + uuid;
     }
+
+    @GetMapping("/pay/ratelimit/{id}")
+    public String payRatelimit(@PathVariable("id") Integer id) {
+        return "hello " + id;
+    }
 }

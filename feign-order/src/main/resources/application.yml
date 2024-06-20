@@ -58,18 +58,26 @@ spring:
 #      cloud-payment-service:
 #        base-config: default
 #bulkhead thread pool
+#resilience4j:
+#  timelimiter:
+#    configs:
+#      default:
+#        timeout-duration: 10s
+#  thread-pool-bulkhead:
+#    configs:
+#      default:
+#        core-thread-pool-size: 1
+#        max-thread-pool-size: 1
+#        queue-capacity: 0
+#
+#    instances:
+#      cloud-payment-service:
+#        base-config: default
+#ratelimit
 resilience4j:
-  timelimiter:
-    configs:
-      default:
-        timeout-duration: 10s
-  thread-pool-bulkhead:
-    configs:
-      default:
-        core-thread-pool-size: 1
-        max-thread-pool-size: 1
-        queue-capacity: 0
-
+  ratelimiter:
     instances:
       cloud-payment-service:
-        base-config: default
+        limit-for-period: 2
+        limit-refresh-period: 5s
+        timeout-duration: 1s

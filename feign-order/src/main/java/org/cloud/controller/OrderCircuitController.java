@@ -5,6 +5,7 @@ import java.util.concurrent.CompletableFuture;
 
 import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import jakarta.annotation.Resource;
 import org.cloud.commons.feign.PayFeignApi;
 import org.slf4j.Logger;
@@ -54,5 +55,15 @@ public class OrderCircuitController {
 
     public CompletableFuture<String> bulkheadThreadPoolFallback(Integer id, Throwable throwable) {
         return CompletableFuture.supplyAsync(() -> "bulkhead thread pool fallback: system busy, please try again later. " + throwable.getMessage());
+    }
+
+    @GetMapping("/feign/pay/ratelimit/{id}")
+    @RateLimiter(name = "cloud-payment-service", fallbackMethod = "rateLimitFallback")
+    public String payRatelimit(@PathVariable("id") Integer id) {
+        return payFeignApi.getPayCircuit(id);
+    }
+
+    public String rateLimitFallback(Integer id, Throwable throwable) {
+        return "rate limit " + id + " fallback: " + throwable.getMessage();
     }
 }

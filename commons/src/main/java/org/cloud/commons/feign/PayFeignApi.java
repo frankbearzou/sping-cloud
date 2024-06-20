@@ -18,4 +18,7 @@ public interface PayFeignApi {
 
     @GetMapping("/pay/circuit/{id}")
     String getPayCircuit(@PathVariable("id") int id);
+
+    @GetMapping("/pay/ratelimit/{id}")
+    public String payRatelimit(@PathVariable("id") Integer id);
 }
