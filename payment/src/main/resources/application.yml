@@ -1,6 +1,8 @@
 server:
   port: 8001
 spring:
+  application:
+    name: cloud-payment-service
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
@@ -11,3 +13,11 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus
+  tracing:
+    sampling:
+      probability: 1.0

@@ -19,8 +19,8 @@ spring:
           enabled: true
           connection-request-timeout-unit: seconds
           connection-request-timeout: 20
-      circuitbreaker:
-        enabled: true
+#      circuitbreaker:
+#        enabled: true
 #        group:
 #          enabled: true
 # circuitbreaker
@@ -74,10 +74,18 @@ spring:
 #      cloud-payment-service:
 #        base-config: default
 #ratelimit
-resilience4j:
-  ratelimiter:
-    instances:
-      cloud-payment-service:
-        limit-for-period: 2
-        limit-refresh-period: 5s
-        timeout-duration: 1s
+#resilience4j:
+#  ratelimiter:
+#    instances:
+#      cloud-payment-service:
+#        limit-for-period: 2
+#        limit-refresh-period: 5s
+#        timeout-duration: 1s
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus
+  tracing:
+    sampling:
+      probability: 1.0
